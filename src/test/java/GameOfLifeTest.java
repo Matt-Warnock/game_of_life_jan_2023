@@ -12,17 +12,17 @@ import static org.mockito.Mockito.verify;
 
 class GameOfLifeTest {
     @Mock UniverseFactory universe_factory;
-    @Mock Universe universe;
+    @Mock Cell cell;
     @Test void
     runs_its_universe() {
         boolean[][] board = {{true}};
+        Cell[][] universe = {{cell}};
 
         given(universe_factory.createFrom(board)).willReturn(universe);
         GameOfLife gameOfLife = new GameOfLife(board, universe_factory);
 
         gameOfLife.nextGen();
 
-        verify(universe).run();
     }
 
 }

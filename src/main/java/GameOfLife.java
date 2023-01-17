@@ -1,6 +1,6 @@
 public class GameOfLife {
     private boolean[][] universeBoard;
-    private Universe universe;
+    private Cell[][] universe;
 
     public GameOfLife(boolean[][] universeBoard, UniverseFactory universe_factory) {
         this.universeBoard = universeBoard;
@@ -8,6 +8,6 @@ public class GameOfLife {
     }
 
     public void nextGen() {
-        this.universe.run();
+        throw new UnsupportedOperationException();
     }
 }
