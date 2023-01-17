@@ -8,15 +8,19 @@ public class FeatureTestGameOfLife {
     public void
     cell_dies_when_under_populated() {
         boolean[][] universe_board = {
-                {false, false, false},
-                {false, true, false},
-                {false, false, false}
+                {false, false, false, false, false},
+                {false, false, false, true, false},
+                {false, false, true, false, false},
+                {false, true, false, false, false},
+                {false, false, false, false, false}
         };
         boolean[][] expected_universe = {
-                {false, false, false},
-                {false, false, false},
-                {false, false, false}
-        };;
+                {false, false, false, false, false},
+                {false, false, false, false, false},
+                {false, false, true, false, false},
+                {false, false, false, false, false},
+                {false, false, false, false, false}
+        };
 
         GameOfLife gameOfLife = new GameOfLife(universe_board);
 
