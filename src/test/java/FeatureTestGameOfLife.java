@@ -21,8 +21,9 @@ public class FeatureTestGameOfLife {
                 {false, false, false, false, false},
                 {false, false, false, false, false}
         };
+        UniverseFactory universe_factory = new UniverseFactory();
 
-        GameOfLife gameOfLife = new GameOfLife(universe_board);
+        GameOfLife gameOfLife = new GameOfLife(universe_board, universe_factory);
 
         gameOfLife.nextGen();
 
