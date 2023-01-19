@@ -18,4 +18,8 @@ public class Cell {
     public int hashCode() {
         return Objects.hash(life_state);
     }
+
+    public void updateNeighbours(int neighbours) {
+        throw new UnsupportedOperationException();
+    }
 }
