@@ -1,19 +1,30 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
 class LifeObserverTest {
+    @Mock Cell livingCell;
+    @Mock Cell deadCell;
     @Test void
-    observes_neighbours_left_and_right_of_cells() {
-        boolean[][] board = {{true, true}};
-        int[][] expectedAllNeighbours = {{1,1}};
-        Cell[][] universe = new UniverseFactory().createFrom(board);
+    observes_living_neighbour_left_of_cell() {
+        given(livingCell.lifeStatus()).willReturn(true);
+        given(deadCell.lifeStatus()).willReturn(false);
+
+        Cell[][] universe = {{deadCell, livingCell}};
+        int[][] expected = {{1, 0}};
 
         LifeObserver lifeObserver = new LifeObserver();
 
-        int[][] allNeighbours = lifeObserver.findAllNeighboursIn(universe);
+        int[][] result = lifeObserver.findAllNeighboursIn(universe);
 
-        assertArrayEquals(allNeighbours, expectedAllNeighbours);
+        assertArrayEquals(result, expected);
     }
 
 }

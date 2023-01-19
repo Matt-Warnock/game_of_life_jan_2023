@@ -22,4 +22,8 @@ public class Cell {
     public void updateNeighbours(int neighbours) {
         throw new UnsupportedOperationException();
     }
+
+    public boolean lifeStatus() {
+        throw new UnsupportedOperationException();
+    }
 }
