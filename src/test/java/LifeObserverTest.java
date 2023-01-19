@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -10,21 +11,33 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class LifeObserverTest {
+    private LifeObserver lifeObserver;
     @Mock Cell livingCell;
     @Mock Cell deadCell;
-    @Test void
-    observes_living_neighbour_left_of_cell() {
+
+    @BeforeEach void
+    setup() {
         given(livingCell.lifeStatus()).willReturn(true);
         given(deadCell.lifeStatus()).willReturn(false);
 
+        lifeObserver = new LifeObserver();
+    }
+    @Test void
+    observes_living_neighbour_left_of_cell() {
         Cell[][] universe = {{deadCell, livingCell}};
         int[][] expected = {{1, 0}};
-
-        LifeObserver lifeObserver = new LifeObserver();
 
         int[][] result = lifeObserver.findAllNeighboursIn(universe);
 
         assertArrayEquals(result, expected);
     }
+    @Test void
+    observes_living_neighbour_right_of_cell() {
+        Cell[][] universe = {{livingCell, deadCell}};
+        int[][] expected = {{0, 1}};
 
+        int[][] result = lifeObserver.findAllNeighboursIn(universe);
+
+        assertArrayEquals(result, expected);
+    }
 }

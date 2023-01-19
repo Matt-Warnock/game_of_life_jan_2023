@@ -4,10 +4,23 @@ public class LifeObserver {
 
         for (int i = 0; i < universe[0].length; i++) {
             if (universe[0][i].lifeStatus()) {
-                allNeighbours[0][i - 1] = 1;
+                if(leftBoundaryCheck(i)) {
+                    allNeighbours[0][i - 1] = 1;
+                }
+                if(rightBoundaryCheck(i, universe)) {
+                    allNeighbours[0][i + 1] = 1;
+                }
             }
         }
 
         return allNeighbours;
+    }
+
+    private boolean rightBoundaryCheck(int i, Cell[][] universe) {
+        return !(i + 1 > universe.length);
+    }
+
+    private static boolean leftBoundaryCheck(int i) {
+        return i > 0;
     }
 }
