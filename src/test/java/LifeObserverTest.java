@@ -40,4 +40,13 @@ class LifeObserverTest {
 
         assertArrayEquals(result, expected);
     }
+    @Test void
+    observes_both_living_neighbour_right_and_left_of_cell() {
+        Cell[][] universe = {{livingCell, deadCell, livingCell}};
+        int[][] expected = {{0, 2, 0}};
+
+        int[][] result = lifeObserver.findAllNeighboursIn(universe);
+
+        assertArrayEquals(result, expected);
+    }
 }

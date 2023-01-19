@@ -5,7 +5,7 @@ public class LifeObserver {
         for (int i = 0; i < universe[0].length; i++) {
             if (universe[0][i].lifeStatus()) {
                 if(leftBoundaryCheck(i)) {
-                    allNeighbours[0][i - 1] = 1;
+                    allNeighbours[0][i - 1] += 1;
                 }
                 if(rightBoundaryCheck(i, universe)) {
                     allNeighbours[0][i + 1] = 1;
