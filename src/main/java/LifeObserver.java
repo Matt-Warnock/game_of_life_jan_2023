@@ -1,14 +1,25 @@
 public class LifeObserver {
-    public int[][] findAllNeighboursIn(Cell[][] universe) {
-        int[][] allNeighbours = new int[universe.length][universe[0].length];
+    private int[][] allNeighbours;
 
-        for (int i = 0; i < universe[0].length; i++) {
-            if (universe[0][i].lifeStatus()) {
-                if(leftBoundaryCheck(i)) {
-                    allNeighbours[0][i - 1] += 1;
-                }
-                if(rightBoundaryCheck(i, universe)) {
-                    allNeighbours[0][i + 1] = 1;
+    public int[][] findAllNeighboursIn(Cell[][] universe) {
+        int yAxis = universe.length;
+        int xAxis = universe[0].length;
+        allNeighbours = new int[yAxis][xAxis];
+
+        for (int yCoordinate = 0; yCoordinate < yAxis; yCoordinate++) {
+            for (int xCoordinate = 0; xCoordinate < xAxis; xCoordinate++) {
+
+                if (universe[yCoordinate][xCoordinate].isAlive()) {
+                    if(leftBoundaryCheck(xCoordinate)) {
+                        allNeighbours[yCoordinate][xCoordinate - 1] += 1;
+                    }
+                    if(rightBoundaryCheck(xCoordinate, universe)) {
+                        allNeighbours[yCoordinate][xCoordinate + 1] = 1;
+                    }
+                    if(topBoundaryCheck(yCoordinate, universe)) {
+                        allNeighbours[yCoordinate - 1][xCoordinate] = 1;
+                    }
+
                 }
             }
         }
@@ -16,11 +27,15 @@ public class LifeObserver {
         return allNeighbours;
     }
 
-    private boolean rightBoundaryCheck(int i, Cell[][] universe) {
-        return !(i + 1 > universe.length);
+    private boolean topBoundaryCheck(int i, Cell[][] universe) {
+        return i > 0;
     }
 
-    private static boolean leftBoundaryCheck(int i) {
-        return i > 0;
+    private boolean rightBoundaryCheck(int j, Cell[][] universe) {
+        return !(j + 1 >= universe[0].length);
+    }
+
+    private boolean leftBoundaryCheck(int j) {
+        return j > 0;
     }
 }

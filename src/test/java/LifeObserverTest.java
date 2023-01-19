@@ -6,7 +6,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -17,8 +16,8 @@ class LifeObserverTest {
 
     @BeforeEach void
     setup() {
-        given(livingCell.lifeStatus()).willReturn(true);
-        given(deadCell.lifeStatus()).willReturn(false);
+        given(livingCell.isAlive()).willReturn(true);
+        given(deadCell.isAlive()).willReturn(false);
 
         lifeObserver = new LifeObserver();
     }
@@ -44,6 +43,15 @@ class LifeObserverTest {
     observes_both_living_neighbour_right_and_left_of_cell() {
         Cell[][] universe = {{livingCell, deadCell, livingCell}};
         int[][] expected = {{0, 2, 0}};
+
+        int[][] result = lifeObserver.findAllNeighboursIn(universe);
+
+        assertArrayEquals(result, expected);
+    }
+    @Test void
+    observes_living_neighbour_top_of_cell() {
+        Cell[][] universe = {{deadCell}, {livingCell}};
+        int[][] expected = {{1},{0}};
 
         int[][] result = lifeObserver.findAllNeighboursIn(universe);
 
