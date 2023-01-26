@@ -21,10 +21,10 @@ public class FeatureTestGameOfLife {
                 {false, false, false, false, false},
                 {false, false, false, false, false}
         };
-        UniverseFactory universe_factory = new UniverseFactory();
+        Universe universe = new Universe().createFrom(universe_board);
         LifeObserver observer = new LifeObserver();
 
-        GameOfLife gameOfLife = new GameOfLife(universe_board, universe_factory, observer);
+        GameOfLife gameOfLife = new GameOfLife(universe_board, universe, observer);
 
         gameOfLife.nextGen();
 

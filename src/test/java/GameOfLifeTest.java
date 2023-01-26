@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -9,18 +10,23 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 
 class GameOfLifeTest {
-    @Mock UniverseFactory universe_factory;
+    @Mock Universe universe;
     @Mock Cell cell;
     @Mock LifeObserver observer;
     @Test void
     runs_its_universe() {
         boolean[][] board = {{true}};
-        Cell[][] universe = {{cell}};
+        int yCoordinate = 0;
+        int xCoordinate = 0;
         int[][] all_neighbours = {{0}};
 
-        given(universe_factory.createFrom(board)).willReturn(universe);
+        given(universe.createFrom(board)).willReturn(universe);
+        given(universe.yAxis()).willReturn(1);
+        given(universe.xAxis()).willReturn(1);
+        given(universe.getCell(yCoordinate, xCoordinate)).willReturn(cell);
         given(observer.findAllNeighboursIn(universe)).willReturn(all_neighbours);
-        GameOfLife gameOfLife = new GameOfLife(board, universe_factory, observer);
+
+        GameOfLife gameOfLife = new GameOfLife(board, universe, observer);
 
         gameOfLife.nextGen();
 

@@ -7,6 +7,14 @@ public class Cell {
         this.isAlive = life_state;
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void updateNeighbours(int neighbours) {
+        throw new UnsupportedOperationException();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -17,13 +25,5 @@ public class Cell {
     @Override
     public int hashCode() {
         return Objects.hash(isAlive);
-    }
-
-    public void updateNeighbours(int neighbours) {
-        throw new UnsupportedOperationException();
-    }
-
-    public boolean isAlive() {
-        throw new UnsupportedOperationException();
     }
 }
